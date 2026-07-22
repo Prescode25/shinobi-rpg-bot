@@ -3802,6 +3802,20 @@ if (cmd === 'profile') {
 
         if (!lowerBody.startsWith('!shinobi')) return;
 
+	// --- ANTI-SPAM COOLDOWN SYSTEM ---
+	if (!global.cooldowns) global.cooldowns = {};
+	const now = Date.now();
+	const COOLDOWN_TIME = 2000; // 2 seconds between commands
+
+	if (global.cooldowns[userId] && now < global.cooldowns[userId]) {
+    	// If they spam, ignore the message silently so WhatsApp doesn't get flooded
+   	 return; 
+	}
+	// Set new cooldown timestamp
+	global.cooldowns[userId] = now + COOLDOWN_TIME;
+	// ---------------------------------
+
+
         // Split by spaces, treating multiple spaces as a single space
         const args = lowerBody.split(/\s+/); 
         const cmd = args[1]; // The main action (e.g., 'profile', 'attack')
