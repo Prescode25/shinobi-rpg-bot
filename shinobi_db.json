@@ -1,0 +1,66 @@
+{
+  "120363426813721404@g.us": {
+    "level": 1,
+    "clan": "Hyuga",
+    "missions_completed": 0,
+    "lastActive": 1784545613686,
+    "xp": 0,
+    "ryo": null,
+    "stats": {
+      "hp": 100,
+      "maxHp": 100,
+      "chakra": 50,
+      "chakraMax": 50,
+      "strength": 10,
+      "agility": 30,
+      "intelligence": 10,
+      "maxChakra": 50
+    },
+    "name": "Ekom",
+    "regStep": "village",
+    "village": "leaf",
+    "kekkeiGenkai": "Byakugan",
+    "isRegistered": true,
+    "karma": 100,
+    "statPoints": 0,
+    "battleState": null,
+    "hospitalTimer": null,
+    "location": "training ground",
+    "activeMission": "Rescue Cat",
+    "gems": 10,
+    "rank": "Academy Student",
+    "combatClass": "None",
+    "equippedWeapon": "None",
+    "eightGatesUnlocked": 0,
+    "activeGate": 0,
+    "inventory": {
+      "weapons": [],
+      "pills": [],
+      "scrolls": []
+    },
+    "jutsus": []
+  },
+  "174723715592439@lid": {
+    "isRegistered": true,
+    "regStep": "village",
+    "name": "Ekom",
+    "clan": "Akimichi",
+    "village": "leaf",
+    "level": 1,
+    "xp": 0,
+    "ryo": 500,
+    "stats": {
+      "hp": 100,
+      "maxHp": 100,
+      "chakra": 50,
+      "chakraMax": 50,
+      "strength": 40,
+      "agility": 10,
+      "intelligence": 10
+    },
+    "location": "Hokage Office",
+    "activeMissionId": null,
+    "inventory": [],
+    "kekkeiGenkai": "Expansion"
+  }
+}
