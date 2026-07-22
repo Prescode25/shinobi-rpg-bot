@@ -236,9 +236,7 @@ function getOrCreatePlayer(phone, name) {
     
     return p;
 }
-/
-
-* ============================================================================
+/*============================================================================
 * SHINOBI WORLD ENGINE - MASTER BUILD V5 (PART 2 OF 10)
 * ============================================================================
 * Focus: Village-Clan Distributions, WhatsApp Client Boot, Master Admin
@@ -282,7 +280,7 @@ console.log('✅ ============================================');
 client.on('message', async (msg) => {
 const text = msg.body.trim();
 
-```
+
 // Quick intercept for new players
 if (text.toLowerCase() === '!shinobi') {
     return msg.reply("🍃 *Welcome to the Shinobi World!* Type *!shinobi help* to see the command directory.");
@@ -3790,31 +3788,34 @@ if (cmd === 'profile') {
        Replace your current `client.on('message', async msg => {` setup with this
        to handle spaces like "! shinobi" and case insensitivity like "!SHINOBI".
     */
-    client.on('message', async msg => {
-        let rawBody = msg.body.trim();
-        
-        // Remove spaces between the exclamation mark and the command prefix
-        // Converts "! shinobi admin" to "!shinobi admin"
-        rawBody = rawBody.replace(/^!\s+/, '!'); 
-        
-        // Convert to lowercase for case-insensitive matching
-        const lowerBody = rawBody.toLowerCase();
+    });
 
-        if (!lowerBody.startsWith('!shinobi')) return;
+client.on('message', async msg => {
+    let rawBody = msg.body.trim();
 
-	// --- ANTI-SPAM COOLDOWN SYSTEM ---
-	if (!global.cooldowns) global.cooldowns = {};
-	const now = Date.now();
-	const COOLDOWN_TIME = 2000; // 2 seconds between commands
+    // Remove spaces between the exclamation mark and the command prefix
+    rawBody = rawBody.replace(/^!\s+/, '!');
 
-	if (global.cooldowns[userId] && now < global.cooldowns[userId]) {
-    	// If they spam, ignore the message silently so WhatsApp doesn't get flooded
-   	 return; 
-	}
-	// Set new cooldown timestamp
-	global.cooldowns[userId] = now + COOLDOWN_TIME;
+    // Convert to lowercase for case-insensitive matching
+    const lowerBody = rawBody.toLowerCase();
+
+    if (!lowerBody.startsWith('!shinobi')) return;
+
+    // --- DEFINE USER ID FIRST ---
+    const userId = msg.author || msg.from;
+
+    // --- ANTI-SPAM COOLDOWN SYSTEM ---
+    if (!global.cooldowns) global.cooldowns = {};
+    const now = Date.now();
+    const COOLDOWN_TIME = 2000; // 2 seconds between commands
+
+    if (global.cooldowns[userId] && now < global.cooldowns[userId]) {
+        return; // Ignore spam silently
+    }
+    global.cooldowns[userId] = now + COOLDOWN_TIME;
+
 	// ---------------------------------
-
+})
 
         // Split by spaces, treating multiple spaces as a single space
         const args = lowerBody.split(/\s+/); 
@@ -4339,8 +4340,9 @@ Use *!shinobi help [category]* to see specific commands:
 
         // 6. Premium Player Mission/PvE Boost (If fighting a bot/boss)
         if (attacker.isPremium && defender.isBot) {
-            finalDamage = Math.floor(finalDamage * 1.2); // Premium players do 20% more damage in PvE
+            finalDamage = Math.floor(finalDamage * 1.2); 
+            // Premium players do 20% more damage in PvE
         }
-
+    
         return finalDamage;
     }
